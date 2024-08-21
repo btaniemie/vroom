@@ -56,7 +56,7 @@ const SignIn = () => {
                     className="text-lg text-center text-general-200 mt-10"
                 >
                     No account?{" "}
-                    <Text className="text-primary-500">Sign Up</Text>
+                    <Text className="text-[#006A4E]">Sign Up</Text>
                 </Link>
             </View>
         </ScrollView>

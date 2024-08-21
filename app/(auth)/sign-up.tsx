@@ -23,7 +23,7 @@ const SignUp = () => {
             <View className="flex-1 bg-white">
                 <Image source={images.signUpCar} className="z-0 w-full h-[250px]"/>
                 <Text className="text-2xl text-black font-semibold absolute bottom-5 left-5">
-                     Create Your Account
+                     Get Started 🚀
                 </Text>
             </View>
 
@@ -64,7 +64,7 @@ const SignUp = () => {
                     className="text-lg text-center text-general-200 mt-10"
                 >
                     Created an account?{" "}
-                    <Text className="text-primary-500">Sign In</Text>
+                    <Text className="text-[#006A4E]">Sign In</Text>
                 </Link>
             </View>
         </ScrollView>

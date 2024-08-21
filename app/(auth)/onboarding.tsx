@@ -15,14 +15,14 @@ const onboarding = () => {
             <TouchableOpacity onPress={() => {
                 router.replace('/(auth)/sign-up')
             }} className="w-full flex justify-end items-end p-5">
-                <Text className="text-[#0286FF] text-lg font-bold">Skip</Text>
+                <Text className="text-[#006A4E] text-lg font-bold">Skip</Text>
             </TouchableOpacity>
 
             <Swiper 
                 ref={swiperRef} 
                 loop={false} 
                 dot={<View className="w-[32px] h-[4px] mx-1 bg-[#E2E8F0] rounded-full"/>}
-                activeDot={<View className="w-[32px] h-[4px] mx-1 bg-[#0286FF] rounded-full"/>}
+                activeDot={<View className="w-[32px] h-[4px] mx-1 bg-[#4B6F44] rounded-full"/>}
                 onIndexChanged={(index) => setActiveIndex(index)}
             >
                 {welcome.map((item) => (
