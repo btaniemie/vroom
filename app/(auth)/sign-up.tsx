@@ -19,7 +19,7 @@ const SignUp = () => {
       });
 
       const [verification, setVerification] = useState({
-        state: "default",
+        state: "success",
         error: "",
         code: "",
       });
@@ -132,6 +132,22 @@ const SignUp = () => {
                     <Text className="text-[#006A4E]">Sign In</Text>
                 </Link>
             </View>
+
+            <ReactNativeModal isVisible={verification.state === 'success'}>
+              <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
+                  <Image
+                  source={images.check}
+                  className="w-[110px] h-[110px] mx-auto my-5"
+                />
+
+                <Text className="text-3xl font-bold text-center">
+                  Completed
+                </Text>
+                <Text className="text-base text-gray-400 font-medium text-center mt-2">
+                  You have successfully created your account.
+                </Text>
+              </View>
+            </ReactNativeModal>
         </View>          
         </ScrollView>
     )
