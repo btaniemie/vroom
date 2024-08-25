@@ -3,7 +3,7 @@ import InputField from "@/components/InputField";
 import OAuth from "@/components/OAuth";
 import { icons, images } from "@/constants";
 import { useSignUp } from "@clerk/clerk-expo";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { useState } from "react";
 import { Image, ScrollView, Text, View } from "react-native";
 import ReactNativeModal from "react-native-modal";
@@ -19,7 +19,7 @@ const SignUp = () => {
       });
 
       const [verification, setVerification] = useState({
-        state: "success",
+        state: "pending",
         error: "",
         code: "",
       });
@@ -146,6 +146,12 @@ const SignUp = () => {
                 <Text className="text-base text-gray-400 font-medium text-center mt-2">
                   You have successfully created your account.
                 </Text>
+
+                <CustomButton
+                  title="Next"
+                  onPress={() => router.push(`/(root)/(tabs)/home`)}
+                  className="mt-5"
+                />
               </View>
             </ReactNativeModal>
         </View>          
