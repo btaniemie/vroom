@@ -5,12 +5,13 @@ import { icons, images } from "@/constants";
 import { useSignUp } from "@clerk/clerk-expo";
 import { Link, router } from "expo-router";
 import { useState } from "react";
-import { Image, ScrollView, Text, View } from "react-native";
+import { Alert, Image, ScrollView, Text, View } from "react-native";
 import ReactNativeModal from "react-native-modal";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const SignUp = () => {
     const { isLoaded, signUp, setActive } = useSignUp()
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const [form, setForm] = useState({
         name: "",
@@ -45,6 +46,7 @@ const SignUp = () => {
           // See https://clerk.com/docs/custom-flows/error-handling
           // for more info on error handling
           console.error(JSON.stringify(err, null, 2))
+          Alert.alert("Error", err.errors[0].longMessage);
         }
       }
     
@@ -136,14 +138,16 @@ const SignUp = () => {
             <ReactNativeModal 
               isVisible={verification.state === 'pending'}
               onModalHide={() => {
-                setVerification({...verification, state: 'success'})
+                if (verification.state === "success") {
+                  setShowSuccessModal(true);
+                }
               }}
             >
               <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
                 <Text className="font-extrabold text-2xl mb-2">
                   Verification
                 </Text>
-                <Text className="font-Jakarta mb-5">
+                <Text className="font-medium mb-5">
                   A code to verify your account has been sent to {form.email}
                 </Text>
               <InputField
@@ -171,7 +175,7 @@ const SignUp = () => {
               </View>
             </ReactNativeModal>
 
-            <ReactNativeModal isVisible={verification.state === 'success'}>
+            <ReactNativeModal isVisible={showSuccessModal}>
               <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
                   <Image
                   source={images.check}
@@ -187,7 +191,10 @@ const SignUp = () => {
 
                 <CustomButton
                   title="Next"
-                  onPress={() => router.push(`/(root)/(tabs)/home`)}
+                  onPress={() => {
+                    setShowSuccessModal(false)
+                    router.push(`/(root)/(tabs)/home`)
+                  }}
                   className="mt-5"
                 />
               </View>
