@@ -19,7 +19,7 @@ const SignUp = () => {
       });
 
       const [verification, setVerification] = useState({
-        state: "pending",
+        state: "default",
         error: "",
         code: "",
       });
@@ -133,6 +133,44 @@ const SignUp = () => {
                 </Link>
             </View>
 
+            <ReactNativeModal 
+              isVisible={verification.state === 'pending'}
+              onModalHide={() => {
+                setVerification({...verification, state: 'success'})
+              }}
+            >
+              <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
+                <Text className="font-extrabold text-2xl mb-2">
+                  Verification
+                </Text>
+                <Text className="font-Jakarta mb-5">
+                  A code to verify your account has been sent to {form.email}
+                </Text>
+              <InputField
+                label={"Code"}
+                icon={icons.lock}
+                placeholder={"12345"}
+                value={verification.code}
+                keyboardType="numeric"
+                onChangeText={(code) =>
+                  setVerification({ ...verification, code })
+                }
+              />
+
+              {verification.error && (
+                <Text className="text-red-500 text-sm mt-1">
+                  {verification.error}
+                </Text>
+              )}
+
+              <CustomButton
+                title="Verify"
+                onPress={onPressVerify}
+                className="mt-5 bg-success-500"
+              />
+              </View>
+            </ReactNativeModal>
+
             <ReactNativeModal isVisible={verification.state === 'success'}>
               <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
                   <Image
@@ -144,7 +182,7 @@ const SignUp = () => {
                   Completed
                 </Text>
                 <Text className="text-base text-gray-400 font-medium text-center mt-2">
-                  You have successfully created your account.
+                  Your account is successfully verified.
                 </Text>
 
                 <CustomButton
